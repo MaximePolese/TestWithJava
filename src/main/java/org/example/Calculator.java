@@ -17,6 +17,7 @@ public class Calculator {
     }
 
     public String divide(int a, int b) {
+        //gestion de la division par zéro en retournant un string
         if (b == 0) {
             return "Cannot divide by zero";
         }
@@ -47,5 +48,9 @@ public class Calculator {
         bd = bd.setScale(7, RoundingMode.HALF_UP);
         System.out.println(bd);
         return bd.floatValue();
+    }
+
+    public float divideFloatCorrection(float a, float b) throws ArithmeticException {
+        return a / b;
     }
 }

@@ -2,6 +2,7 @@ import org.example.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CalculatorTest {
     @Test
@@ -70,5 +71,28 @@ public class CalculatorTest {
     public void testDivideByZeroFloat() {
         Calculator calculator = new Calculator();
         assertEquals("Cannot divide by zero", calculator.divideFloat(4.0f, 0.0f));
+    }
+
+    @Test
+    public void testDivideFloatException() {
+        try {
+            Calculator calculator = new Calculator();
+            float result = calculator.divideFloatCorrection(14.8f, 0.0f);
+            fail();
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+            assertEquals("/ by zero", e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            fail();
+        }
+    }
+
+    @Test
+    public void testDivideFloatPrecision() {
+        Calculator calculator = new Calculator();
+        float result = calculator.divideFloatCorrection(14.8f, 9.5f);
+        // delta pour définir la précision, nombre de chiffres après la virgule
+        assertEquals(1.5578947, result, 0.0000001);
     }
 }
